@@ -12,6 +12,7 @@ import java.util.List;
 
 @Repository
 public class UsersDBQuery {
+//    public interface repo extends JpaRepository<User, Long>
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

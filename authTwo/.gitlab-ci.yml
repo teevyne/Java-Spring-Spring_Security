@@ -1,0 +1,19 @@
+image: "maven:3-jdk-8"
+
+before_script:
+  - echo "before script"
+
+stages:
+  - build
+
+
+build:
+  stage: build
+  script:
+    - mvn package
+
+tests:
+  stage: build
+  script:
+    - mvn test
+
