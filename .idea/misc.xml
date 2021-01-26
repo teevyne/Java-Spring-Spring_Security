@@ -8,6 +8,8 @@
       <list>
         <option value="$PROJECT_DIR$/spring-boot-oauth-jwt/pom.xml" />
         <option value="$PROJECT_DIR$/auth/pom.xml" />
+        <option value="$PROJECT_DIR$/newoauth/pom.xml" />
+        <option value="$PROJECT_DIR$/oauththree/pom.xml" />
       </list>
     </option>
   </component>

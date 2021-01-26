@@ -75,6 +75,7 @@ public class ConfigOAuth2 extends AuthorizationServerConfigurerAdapter {
 
     @Bean
     public JwtTokenStore tokenStore() {
+
         return new JwtTokenStore(tokenEnhancer());
     }
 
@@ -98,3 +99,14 @@ public class ConfigOAuth2 extends AuthorizationServerConfigurerAdapter {
                 .refreshTokenValiditySeconds(20000);
     }
 }
+
+//Expectations
+//
+//        The vid
+//        All the grant types - as the media for consumption would differ
+//        fetching the user ID from the principal
+//
+//
+//        https://www.pixeltrice.com/spring-boot-security-using-oauth2-with-jwt/
+//        https://dzone.com/articles/implementing-your-own-spring-boot-oauth2-authoriza
+//        https://medium.com/swlh/spring-oauth-2-9b0bfbf9a62a (read)
