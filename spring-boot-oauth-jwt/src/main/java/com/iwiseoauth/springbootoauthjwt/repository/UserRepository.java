@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
  * @author USER
  */
 @Repository
-@RepositoryRestResource
 public interface UserRepository extends JpaRepository<User, String> {
 
 

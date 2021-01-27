@@ -1,5 +1,6 @@
 package com.iwiseoauth.springbootoauthjwt.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -10,6 +11,7 @@ import java.util.Collection;
 
 @Data
 @Entity
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -19,5 +21,5 @@ public class User {
 
     private String role;
 
-
+    public User() {}
 }

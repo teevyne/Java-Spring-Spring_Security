@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -17,8 +18,11 @@ public class UserService implements UserDetailsService {
 
     private UserRepository userRepo;
 
-    public UserService(UserRepository userRepo) {
+    private PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Optional<User> findById(String username){
@@ -43,4 +47,12 @@ public class UserService implements UserDetailsService {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_" + role));
     }
 
+    public boolean userExists(String username) {
+        return userRepo.existsById(username);
+    }
+
+    public User saveUser(User user) {
+
+        return userRepo.save(new User(user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getRole()));
+    }
 }
