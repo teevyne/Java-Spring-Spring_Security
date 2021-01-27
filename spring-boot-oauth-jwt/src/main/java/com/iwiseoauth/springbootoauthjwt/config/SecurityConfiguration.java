@@ -1,5 +1,6 @@
-package com.iwiseoauth.springbootoauthjwt;
+package com.iwiseoauth.springbootoauthjwt.config;
 
+import com.iwiseoauth.springbootoauthjwt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UsersService usersService;
+    private UserService userService;
 
 
     @Bean
@@ -31,17 +32,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(usersService).passwordEncoder(encoder());
+        auth.userDetailsService(userService).passwordEncoder(encoder());
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().anyRequest().authenticated().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.NEVER);
     }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring();
+        web.ignoring()
+                .antMatchers("/api-docs/**","/configuration/**", "/swagger-ui/**", "/swagger-resources/**","/swagger-ui.html/",
+                        "/webjars/**", "/api-docs", "/api-docs/**", "/v2/api-docs/**", "/actuator/*", "/actuator",
+                        "/actuator/health", "/api/misc/**","/swagger-ui-custom.html"
+                );
     }
+
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {

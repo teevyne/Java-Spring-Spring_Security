@@ -1,5 +1,6 @@
-package com.iwiseoauth.springbootoauthjwt;
+package com.iwiseoauth.springbootoauthjwt.config;
 
+import com.iwiseoauth.springbootoauthjwt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -8,12 +9,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
+@EnableAuthorizationServer
 public class ConfigOAuth2 extends AuthorizationServerConfigurerAdapter {
 
     private String clientId = "client-developer";
@@ -63,7 +66,7 @@ public class ConfigOAuth2 extends AuthorizationServerConfigurerAdapter {
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    UsersService usersService;
+    UserService userService;
 
     @Bean
     public JwtAccessTokenConverter tokenEnhancer() {
@@ -84,7 +87,7 @@ public class ConfigOAuth2 extends AuthorizationServerConfigurerAdapter {
                 .tokenStore(tokenStore())
                 .accessTokenConverter(tokenEnhancer())
                 .authenticationManager(authenticationManager)
-                .userDetailsService(usersService);
+                .userDetailsService(userService);
 
     }
     @Override
