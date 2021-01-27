@@ -25,15 +25,15 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Optional<User> findById(String username){
-        return  userRepo.findById(username);
+    public Optional<User> findByUsername(String username){
+        return  userRepo.findByUsername(username);
     }
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Optional<User> user = userRepo.findById(username);
+        Optional<User> user = userRepo.findByUsername(username);
 
         if(user.isPresent()){
             return new org.springframework.security.core.userdetails.User(user.get().getUsername(), user.get().getPassword(),
@@ -48,7 +48,7 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean userExists(String username) {
-        return userRepo.existsById(username);
+        return userRepo.findByUsername(username).isPresent();
     }
 
     public User saveUser(User user) {
