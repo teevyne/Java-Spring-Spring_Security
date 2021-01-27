@@ -29,7 +29,7 @@ public class UserController {
     @GetMapping("/{username}")
     public ResponseEntity<?> getStudentByID(@PathVariable String username) {
         if(userService.userExists(username)) {
-            return new ResponseEntity<>(userService.findById(username).get(), HttpStatus.OK);
+            return new ResponseEntity<>(userService.findByUsername(username).get(), HttpStatus.OK);
         }else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
