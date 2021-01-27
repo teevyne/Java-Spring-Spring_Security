@@ -32,7 +32,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 "/webjars/**", "/api-docs", "/api-docs/**", "/v2/api-docs/**", "/actuator/*", "/actuator",
                 "/actuator/health", "/api/misc/**", "/actuator/health", "/oauth/token", "/swagger-ui-custom.html",
                 "/api/misc/**").permitAll()
-                .antMatchers(HttpMethod.GET, PERMIT_USER_GET_REQUEST).access("hasRole('COMPANY')")
+                .antMatchers(HttpMethod.GET, PERMIT_USER_GET_REQUEST).access("hasRole('USER')")
                 .and().exceptionHandling()
                 .accessDeniedHandler(new OAuth2AccessDeniedHandler());
 
