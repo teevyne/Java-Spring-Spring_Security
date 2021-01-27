@@ -17,6 +17,9 @@ import java.util.List;
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
+    private final String[] PERMIT_USER_GET_REQUEST = { "/home", "/user/{username}"};
+
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.cors().configurationSource(request -> {
@@ -28,7 +31,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         }).and().authorizeRequests().antMatchers("/api-docs/**","/configuration/**", "/swagger-ui/**", "/swagger-resources/**","/swagger-ui.html/",
                 "/webjars/**", "/api-docs", "/api-docs/**", "/v2/api-docs/**", "/actuator/*", "/actuator",
                 "/actuator/health", "/api/misc/**", "/actuator/health", "/oauth/token", "/swagger-ui-custom.html",
-                "/api/misc/**").permitAll();
+                "/api/misc/**").permitAll()
+                .antMatchers(HttpMethod.GET, PERMIT_USER_GET_REQUEST).access("hasRole('COMPANY')")
+                .and().exceptionHandling()
+                .accessDeniedHandler(new OAuth2AccessDeniedHandler());
 
     }
 

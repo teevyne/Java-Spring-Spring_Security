@@ -10,6 +10,6 @@ public class ResourceController {
 
     @GetMapping
     public String index() {
-        return "This would be a resource - protected resource of the user";
+        return "This would be a resource - protected resource of the user. It is only accessible to those with role USER";
     }
 }
