@@ -13,7 +13,12 @@ public class ResourceController {
     public String index() {
         //Lets return the id of any user who acceses this endpoint
 
-        return SecurityContextHolder.getContext().getAuthentication().getName();
+//        return SecurityContextHolder.getContext().getAuthentication().getName();
+//        return SecurityContextHolder.getContext().getAuthentication().getCredentials().toString();
+
+        String result =  SecurityContextHolder.getContext().getAuthentication().getName();
+
+        return ("This would be a protected resource for the user" + result);
     }
 
     @GetMapping("/admin")

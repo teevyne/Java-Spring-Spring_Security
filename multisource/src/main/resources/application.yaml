@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: multisource
+  dbprofileservice:
+    driverClassName: com.mysql.jdbc.Driver
+    jdbc-url: "jdbc:mysql://localhost:3306/profileservice?serverTimezone=UTC"
+#    Jdbc:mysql://localhost:3306/newiWiseDatabase?serverTimezone=UTC
+    password: appuser123
+    username: appuser
+    testOnBorrow: true
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableidleTimeMillis: 30000
+    validationQuery: SELECT 1
+    max-active: 15
+    max-idle: 10
+    max-wait: 8000
+  dbtaskservice:
+    driverClassName: com.mysql.jdbc.Driver
+    jdbc-url: "jdbc:mysql://localhost:3306/taskservice?serverTimezone=UTC"
+    password: appuser123
+    username: appuser
+    testOnBorrow: true
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableidleTimeMillis: 30000
+    validationQuery: SELECT 1
+    max-active: 15
+    max-idle: 10
+    max-wait: 8000
+server:
+  port : 8081
